@@ -25,18 +25,13 @@ const Table = ({ data, darkMode }) => {
   };
 
   const sortedData = [...data].sort((a, b) => {
-    if (sortBy) {
-      const valueA = typeof a[sortBy] === 'string' ? a[sortBy].toLowerCase() : a[sortBy];
-      const valueB = typeof b[sortBy] === 'string' ? b[sortBy].toLowerCase() : b[sortBy];
-      if (valueA < valueB) {
-        return sortDirection === 'asc' ? -1 : 1;
-      }
-      if (valueA > valueB) {
-        return sortDirection === 'asc' ? 1 : -1;
-      }
-      return 0;
+    const valueA = a[sortBy];
+    const valueB = b[sortBy];
+    if (sortDirection === 'asc') {
+      return valueA - valueB;
+    } else {
+      return valueB - valueA;
     }
-    return 0;
   });
 
   const filteredData = sortedData.filter(item => {
